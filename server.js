@@ -40,7 +40,7 @@ const pantryCtrl = require("./controllers/pantryCtrl");
 
 app.get("/", (req, res) => {
   if (req.session.user) {
-    res.redirect(`/user/${req.session.user._id}/pantry`);
+    res.redirect(`/users/${req.session.user._id}/pantry`);
   } else {
     res.render("index.ejs");
   }
@@ -58,7 +58,9 @@ app.use(isSignedIn);
 
 app.get("/auth/sign-out", authCtrl.signOut);
 
-app.get("/user/:id/pantry", pantryCtrl.index);
+app.get("/users/:id/pantry", pantryCtrl.index);
+app.get("/users/:id/pantry/new", pantryCtrl.newFood);
+app.post("/users/:id/pantry", pantryCtrl.create);
 
 // PORT
 

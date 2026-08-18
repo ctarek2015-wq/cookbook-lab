@@ -14,11 +14,13 @@
 
   <ul>
     <% pantry.forEach((item)=>{ %>
-    <li><%= item.name %></li>
-    <li><%= item.calories %></li>
+    <a href="/users/<%= user._id %>/pantry/<%= item._id %>/show">
+      <li><%= item.name %></li>
+    </a>
     <% }) %>
   </ul>
 
+  <a href="/users/<%= user._id %>/pantry/new"><button>Add new</button></a>
 
 </body>
 

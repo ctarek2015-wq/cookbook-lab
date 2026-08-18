@@ -13,9 +13,28 @@ const index = async (req, res) => {
   }
 };
 
-// new
+// newFood
+
+const newFood = async (req, res) => {
+  try {
+    res.render("pantry/new.ejs");
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 // create
+
+const create = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.pantry.push(req.body);
+    await user.save();
+    res.redirect(`/users/${req.params.id}/pantry`);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 // show
 
@@ -27,4 +46,4 @@ const index = async (req, res) => {
 
 // Export
 
-module.exports = { index };
+module.exports = { index, newFood, create };

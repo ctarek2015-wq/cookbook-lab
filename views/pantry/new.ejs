@@ -10,7 +10,17 @@
 
 <body>
 
+  <h1>Add new food</h1>
 
+  <form action="/users/<%= user._id %>/pantry" method="post">
+    <label for="name">Food name:</label>
+    <input type="text" name="name" id="name" required>
+
+    <label for="calories">Calories:</label>
+    <input type="number" name="calories" id="calories" required>
+
+    <button type="submit">Add</button>
+  </form>
 
 </body>
 
