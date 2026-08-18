@@ -7,10 +7,6 @@ const foodSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  calories: {
-    type: Number,
-    required: true,
-  },
 });
 
 // SCHEMA
