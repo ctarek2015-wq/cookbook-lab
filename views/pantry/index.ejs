@@ -14,7 +14,7 @@
 
   <ul>
     <% pantry.forEach((item)=>{ %>
-    <a href="/users/<%= user._id %>/pantry/<%= item._id %>/show">
+    <a href="/users/<%= user._id %>/pantry/<%= item._id %>">
       <li><%= item.name %></li>
     </a>
     <% }) %>

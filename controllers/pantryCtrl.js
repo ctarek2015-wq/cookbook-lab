@@ -38,12 +38,55 @@ const create = async (req, res) => {
 
 // show
 
+const show = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const pantry = user.pantry.id(req.params.foodId);
+    res.render("pantry/show.ejs", { pantry, user });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 // edit
+
+const edit = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const pantry = user.pantry.id(req.params.foodId);
+    res.render("pantry/edit.ejs", { pantry, user });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 // update
 
+const update = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const pantry = user.pantry.id(req.params.foodId);
+    pantry.set(req.body);
+    await user.save();
+    res.redirect(`/users/${req.params.id}/pantry/${req.params.foodId}`);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 // delete
+
+const deletePantry = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.pantry.pull(req.params.foodId);
+    await user.save();
+    res.redirect(`/users/${req.params.id}/pantry`);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 // Export
 
-module.exports = { index, newFood, create };
+module.exports = { index, newFood, create, show, edit, update, deletePantry };
