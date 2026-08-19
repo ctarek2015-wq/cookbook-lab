@@ -14,17 +14,12 @@ const register = async (req, res) => {
     if (!name || !email || !password || !confirmPassword) {
       return res.send("there are empty fields");
     }
-
     if (password !== confirmPassword) {
-      console.log("hi");
       return res.send("passwords do not match");
     }
 
     const userExists = await User.findOne({ email: email });
-
     if (userExists) {
-      console.log("hey");
-
       return res.send("Invalid Credentials");
     }
 
@@ -39,7 +34,7 @@ const register = async (req, res) => {
       res.redirect("/");
     });
   } catch (err) {
-    console.log(err.message);
+    res.redirect("/auth/sign-up");
   }
 };
 
@@ -73,7 +68,7 @@ const login = async (req, res) => {
       res.redirect("/");
     });
   } catch (err) {
-    console.log(err.message);
+    res.redirect("/auth/sign-in");
   }
 };
 

@@ -20,18 +20,14 @@ const create = async (req, res) => {
     await newIngredient.save();
     res.redirect(`/users/${userId}/ingredients`);
   } catch (err) {
-    console.log(err.message);
+    res.redirect(`/users/${userId}/ingredients/new`);
   }
 };
 
 const show = async (req, res) => {
-  try {
-    const user = await User.findById(req.session.user._id);
-    const ingredient = await Ingredients.findById(req.params.ingrId);
-    res.render("ingredients/show.ejs", { ingredient, user });
-  } catch (err) {
-    console.log(err.message);
-  }
+  const user = await User.findById(req.session.user._id);
+  const ingredient = await Ingredients.findById(req.params.ingrId);
+  res.render("ingredients/show.ejs", { ingredient, user });
 };
 
 const edit = async (req, res) => {
@@ -48,7 +44,7 @@ const update = async (req, res) => {
     await ingredient.save();
     res.redirect(`/users/${userId}/ingredients/${req.params.ingrId}`);
   } catch (err) {
-    console.log(err.message);
+    res.redirect(`/users/${userId}/ingredients/${req.params.ingrId}/edit`);
   }
 };
 
@@ -58,7 +54,7 @@ const deleteIngredient = async (req, res) => {
     await Ingredients.findByIdAndDelete(req.params.ingrId);
     res.redirect(`/users/${userId}/ingredients`);
   } catch (err) {
-    console.log(err.message);
+    res.redirect(`/users/${userId}/ingredients/${req.params.ingrId}`);
   }
 };
 

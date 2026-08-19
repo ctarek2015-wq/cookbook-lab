@@ -23,21 +23,16 @@ const create = async (req, res) => {
     await newRecipe.save();
     res.redirect(`/users/${userId}/recipes`);
   } catch (err) {
-    console.log(err.message);
+    res.redirect(`/users/${userId}/recipes/new`);
   }
 };
 
 const show = async (req, res) => {
-  try {
-    const user = await User.findById(req.session.user._id);
-    const recipe = await Recipe.findById(req.params.recipeId).populate(
-      "ingredients",
-    );
-    console.log(recipe);
-    res.render("recipes/show.ejs", { recipe, user });
-  } catch (err) {
-    console.log(err.message);
-  }
+  const user = await User.findById(req.session.user._id);
+  const recipe = await Recipe.findById(req.params.recipeId).populate(
+    "ingredients",
+  );
+  res.render("recipes/show.ejs", { recipe, user });
 };
 
 const edit = async (req, res) => {
@@ -55,7 +50,7 @@ const update = async (req, res) => {
     await recipe.save();
     res.redirect(`/users/${userId}/recipes/${req.params.recipeId}`);
   } catch (err) {
-    console.log(err.message);
+    res.redirect(`/users/${userId}/recipes/${req.params.recipeId}/edit`);
   }
 };
 
@@ -65,7 +60,7 @@ const deleteRecipe = async (req, res) => {
     await Recipe.findByIdAndDelete(req.params.recipeId);
     res.redirect(`/users/${userId}/recipes`);
   } catch (err) {
-    console.log(err.message);
+    res.redirect(`/users/${userId}/recipes/${req.params.recipeId}`);
   }
 };
 
