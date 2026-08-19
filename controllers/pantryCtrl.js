@@ -4,7 +4,7 @@ const User = require("../models/users");
 
 const index = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.session.user._id);
     const pantry = user.pantry;
 
     res.render("pantry/index.ejs", { pantry, user });
@@ -27,10 +27,11 @@ const newFood = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const userId = req.session.user._id;
+    const user = await User.findById(userId);
     user.pantry.push(req.body);
     await user.save();
-    res.redirect(`/users/${req.params.id}/pantry`);
+    res.redirect(`/users/${userId}/pantry`);
   } catch (err) {
     console.log(err.message);
   }
@@ -40,7 +41,7 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.session.user._id);
     const pantry = user.pantry.id(req.params.foodId);
     res.render("pantry/show.ejs", { pantry, user });
   } catch (err) {
@@ -52,7 +53,7 @@ const show = async (req, res) => {
 
 const edit = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.session.user._id);
     const pantry = user.pantry.id(req.params.foodId);
     res.render("pantry/edit.ejs", { pantry, user });
   } catch (err) {
@@ -64,11 +65,12 @@ const edit = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const userId = req.session.user._id;
+    const user = await User.findById(userId);
     const pantry = user.pantry.id(req.params.foodId);
     pantry.set(req.body);
     await user.save();
-    res.redirect(`/users/${req.params.id}/pantry/${req.params.foodId}`);
+    res.redirect(`/users/${userId}/pantry/${req.params.foodId}`);
   } catch (err) {
     console.log(err.message);
   }
@@ -78,10 +80,11 @@ const update = async (req, res) => {
 
 const deletePantry = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const userId = req.session.user._id;
+    const user = await User.findById(userId);
     user.pantry.pull(req.params.foodId);
     await user.save();
-    res.redirect(`/users/${req.params.id}/pantry`);
+    res.redirect(`/users/${userId}/pantry`);
   } catch (err) {
     console.log(err.message);
   }

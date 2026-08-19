@@ -3,7 +3,7 @@ const Ingredients = require("../models/ingredients");
 const Recipe = require("../models/recipes");
 
 const index = async (req, res) => {
-  const userId = req.params.id;
+  const userId = req.session.user._id;
   const user = await User.findById(userId);
   const ingredients = await Ingredients.find();
   res.render("ingredients/index.ejs", { ingredients, user });
@@ -15,7 +15,7 @@ const newIngredient = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userId = req.session.user._id;
     const newIngredient = await Ingredients.create(req.body);
     await newIngredient.save();
     res.redirect(`/users/${userId}/ingredients`);
@@ -26,7 +26,7 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.session.user._id);
     const ingredient = await Ingredients.findById(req.params.ingrId);
     res.render("ingredients/show.ejs", { ingredient, user });
   } catch (err) {
@@ -35,14 +35,14 @@ const show = async (req, res) => {
 };
 
 const edit = async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.session.user._id);
   const ingredient = await Ingredients.findById(req.params.ingrId);
   res.render("ingredients/edit.ejs", { ingredient, user });
 };
 
 const update = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userId = req.session.user._id;
     const ingredient = await Ingredients.findById(req.params.ingrId);
     ingredient.set(req.body);
     await ingredient.save();
@@ -54,7 +54,7 @@ const update = async (req, res) => {
 
 const deleteIngredient = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userId = req.session.user._id;
     await Ingredients.findByIdAndDelete(req.params.ingrId);
     res.redirect(`/users/${userId}/ingredients`);
   } catch (err) {

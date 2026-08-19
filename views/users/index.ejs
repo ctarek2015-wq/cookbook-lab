@@ -14,10 +14,9 @@
 
   <ul>
     <% users.forEach(user => { %>
-    <li> Owner: <%= user.name %>: <ul> <% user.pantry.forEach(item => { %> <li> <%= item.name %> </li>
-        <li> <%= item.calories %> </li> <% }) %>
-      </ul>
-    </li>
+    <a href="/users/<%= user._id %>">
+      <li> <%= user.name %> </li>
+    </a>
     <% }); %>
   </ul>
 

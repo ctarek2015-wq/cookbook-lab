@@ -49,8 +49,6 @@ app.get("/", (req, res) => {
   }
 });
 
-app.get("/community", usersCtrl.index);
-
 app.get("/auth/sign-up", authCtrl.signUp);
 app.post("/auth/sign-up", authCtrl.register);
 
@@ -87,6 +85,10 @@ app.get("/users/:id/ingredients/:ingrId", ingrCtrl.show);
 app.get("/users/:id/ingredients/:ingrId/edit", ingrCtrl.edit);
 app.put("/users/:id/ingredients/:ingrId", ingrCtrl.update);
 app.delete("/users/:id/ingredients/:ingrId/delete", ingrCtrl.deleteIngredient);
+
+// Community
+app.get("/users", usersCtrl.index);
+app.get("/users/:id", usersCtrl.show);
 
 // PORT
 
