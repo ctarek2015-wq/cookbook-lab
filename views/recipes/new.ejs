@@ -19,11 +19,21 @@
     <label for="instructions">Instructions:</label>
     <input type="text" name="instructions" id="instructions" required>
 
-    <!-- <label for="ingredients">Ingredients:</label>
-    <input type="text" name="ingredients" id="ingredients" required> -->
+    <fieldset>
+      <legend>Ingredients</legend>
 
-    <button type="submit">Add</button>
+      <% ingredients.forEach(ingredient => { %>
+      <label for="ingredients"><%= ingredient.name %>:</label>
+      <input type="checkbox" name="ingredients" value='<%= ingredient._id %>' id="ingredients" <% }) %>>
+
+    </fieldset>
+
+
+    <button type="submit">Add Recipe</button>
+
   </form>
+
+
 
 </body>
 

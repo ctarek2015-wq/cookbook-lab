@@ -11,8 +11,15 @@
 <body>
 
   <h1><%= recipe.name %></h1>
-
+  <p>Instructions:</p>
   <p><%= recipe.instructions %></p>
+
+  <ul>
+    <% recipe.ingredients.forEach(item => { %>
+    <li><%= item.name %></li>
+    <% }); %>
+
+  </ul>
 
 
 
