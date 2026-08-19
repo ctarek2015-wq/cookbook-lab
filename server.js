@@ -10,6 +10,7 @@ const { MongoStore } = require("connect-mongo");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 const port = process.env.PORT || 3000;
+
 const isSignedIn = require("./middlewares/isSignedIn");
 const addUserToViews = require("./middlewares/addUserToViews");
 
