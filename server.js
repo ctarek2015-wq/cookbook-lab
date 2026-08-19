@@ -80,7 +80,14 @@ app.put("/users/:id/recipes/:recipeId", recipeCtrl.update);
 app.delete("/users/:id/recipes/:recipeId/delete", recipeCtrl.deleteRecipe);
 
 // Ingredients
-// app.get("/users/:id/ingredients", ingrCtrl.index);
+app.get("/users/:id/ingredients", ingrCtrl.index);
+app.get("/users/:id/ingredients/new", ingrCtrl.newIngredient);
+app.post("/users/:id/ingredients", ingrCtrl.create);
+app.get("/users/:id/ingredients/:ingrId", ingrCtrl.show);
+app.get("/users/:id/ingredients/:ingrId/edit", ingrCtrl.edit);
+app.put("/users/:id/ingredients/:ingrId", ingrCtrl.update);
+app.delete("/users/:id/ingredients/:ingrId/delete", ingrCtrl.deleteIngredient);
+
 // PORT
 
 app.listen(port, () => {

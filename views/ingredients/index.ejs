@@ -13,14 +13,14 @@
   <h1>Welcome <%= user.name %> to your ingredients!</h1>
 
   <ul>
-    <% pantry.forEach((item)=>{ %>
-    <a href="/users/<%= user._id %>/pantry/<%= item._id %>">
+    <% ingredients.forEach((item)=>{ %>
+    <a href="/users/<%= user._id %>/ingredients/<%= item._id %>">
       <li><%= item.name %></li>
     </a>
     <% }) %>
   </ul>
 
-  <a href="/users/<%= user._id %>/pantry/new"><button>Add new</button></a>
+  <a href="/users/<%= user._id %>/ingredients/new"><button>Add new</button></a>
 
 </body>
 

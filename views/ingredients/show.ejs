@@ -10,11 +10,11 @@
 
 <body>
 
-  <h1><%= pantry.name %></h1>
+  <h1><%= ingredient.name %></h1>
 
-  <a href="/users/<%= user._id %>/pantry/<%= pantry._id %>/edit"><button>Edit</button></a>
+  <a href="/users/<%= user._id %>/ingredients/<%= ingredient._id %>/edit"><button>Edit</button></a>
 
-  <form action="/users/<%= user._id %>/pantry/<%= pantry._id %>/delete?_method=DELETE" method="post">
+  <form action="/users/<%= user._id %>/ingredients/<%= ingredient._id %>/delete?_method=DELETE" method="post">
     <button type="submit">Delete</button>
   </form>
 

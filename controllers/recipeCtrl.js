@@ -1,5 +1,4 @@
 const User = require("../models/users");
-const Ingredients = require("../models/ingredients");
 const Recipe = require("../models/recipes");
 
 const index = async (req, res) => {
@@ -47,7 +46,7 @@ const update = async (req, res) => {
     const recipe = await Recipe.findById(req.params.recipeId);
     recipe.set(req.body);
     await recipe.save();
-    res.redirect(`/users/${userId}/recipes`);
+    res.redirect(`/users/${userId}/recipes/${req.params.recipeId}`);
   } catch (err) {
     console.log(err.message);
   }
