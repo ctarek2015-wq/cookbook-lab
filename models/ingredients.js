@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-const ingerSchema = new mongoose.Schema({
+const ingrSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
 });
 
-const Inger = mongoose.model("Inger", ingerSchema);
+const Ingredients = mongoose.model("Ingredients", ingrSchema);
 
-module.exports = Inger;
+module.exports = Ingredients;

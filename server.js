@@ -36,6 +36,8 @@ app.use(morgan("dev"));
 const authCtrl = require("./controllers/authCtrl");
 const pantryCtrl = require("./controllers/pantryCtrl");
 const usersCtrl = require("./controllers/usersCtrl");
+const ingrCtrl = require("./controllers/ingrCtrl");
+const recipeCtrl = require("./controllers/recipeCtrl");
 
 // Public Routes
 
@@ -60,7 +62,7 @@ app.post("/auth/sign-in", authCtrl.login);
 app.use(isSignedIn);
 
 app.get("/auth/sign-out", authCtrl.signOut);
-
+// Pantry
 app.get("/users/:id/pantry", pantryCtrl.index);
 app.get("/users/:id/pantry/new", pantryCtrl.newFood);
 app.post("/users/:id/pantry", pantryCtrl.create);
@@ -68,7 +70,17 @@ app.get("/users/:id/pantry/:foodId", pantryCtrl.show);
 app.get("/users/:id/pantry/:foodId/edit", pantryCtrl.edit);
 app.put("/users/:id/pantry/:foodId", pantryCtrl.update);
 app.delete("/users/:id/pantry/:foodId/delete", pantryCtrl.deletePantry);
+// Recipes
+app.get("/users/:id/recipes", recipeCtrl.index);
+app.get("/users/:id/recipes/new", recipeCtrl.newRecipe);
+app.post("/users/:id/recipes", recipeCtrl.create);
+app.get("/users/:id/recipes/:recipeId", recipeCtrl.show);
+app.get("/users/:id/recipes/:recipeId/edit", recipeCtrl.edit);
+app.put("/users/:id/recipes/:recipeId", recipeCtrl.update);
+app.delete("/users/:id/recipes/:recipeId/delete", recipeCtrl.deleteRecipe);
 
+// Ingredients
+// app.get("/users/:id/ingredients", ingrCtrl.index);
 // PORT
 
 app.listen(port, () => {
